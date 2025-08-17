@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EverKind Keepsakes — Preview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#F7F5F2" />
+  <style>
+    :root{
+      --charcoal:#2C2C2C; --stone:#C3B8A6; --ivory:#F7F5F2; --gold:#C79A3E; --rose:#E8D5D8;
+    }
+    html,body{margin:0;height:100%;background:var(--ivory);color:var(--charcoal);font-family:Inter,system-ui,Arial,sans-serif}
+    header{padding:18px 20px;border-bottom:1px solid #e7e4de;display:flex;gap:16px;align-items:center}
+    header h1{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:22px;margin:0}
+    .wrap{display:grid;grid-template-columns:340px 1fr;gap:18px;height:calc(100% - 60px)}
+    .panel{padding:16px;background:#fff;border:1px solid #eceae6;border-radius:16px;box-shadow:0 1px 8px rgba(0,0,0,.03);overflow:auto}
+    .panel h2{font-family:"Cormorant Garamond",serif;margin:0 0 10px 0;font-size:20px}
+    label{display:block;margin:10px 0 6px 0;font-size:13px;color:#4b4b4b}
+    input[type="file"],textarea,select,input[type="text"]{width:100%;padding:10px;border:1px solid #e6e2da;border-radius:12px;background:#faf9f7}
+    textarea{min-height:120px;resize:vertical}
+    .controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    button{appearance:none;border-radius:999px;border:1px solid var(--charcoal);background:var(--charcoal);color:#fff;padding:10px 14px;font-weight:600;cursor:pointer}
+    button.alt{background:#fff;color:var(--charcoal);border-color:#d1c8b6}
+    button:hover{box-shadow:0 2px 10px rgba(0,0,0,.08)}
+    .canvasWrap{position:relative;background:#f0ede8;border:1px solid #e6e2da;border-radius:16px;height:calc(100% - 20px);margin:10px}
+    .chip{position:absolute;top:10px;left:10px;background:#ffffffcc;border:1px solid #e6e2da;border-radius:999px;padding:6px 10px;font-size:12px}
+    .status{margin-top:10px;font-size:12px;color:#5a5a5a}
+    footer{padding:12px 16px;text-align:center;font-size:12px;color:#777}
+    .note{background:#fff6e6;border:1px solid #ffe2ad;border-radius:12px;padding:10px 12px;margin-top:10px;font-size:12px}
+    @media (max-width: 880px){
+      .wrap{grid-template-columns:1fr; height:auto}
+      .canvasWrap{height:60vh}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="./favicon.svg" alt="" width="22" height="22" role="presentation" />
+    <h1>EverKind Keepsakes — 3D Preview</h1>
+    <span style="margin-left:auto;font-size:12px;color:#7a7a7a">Rotate/zoom • Flip to see back</span>
+  </header>
+  <div class="wrap">
+    <section class="panel" aria-labelledby="config">
+      <h2 id="config">Configure</h2>
+      <label>Front photo</label>
+      <input type="file" id="photoInput" accept="image/*" />
+
+      <label style="margin-top:12px">Back text (engraving)</label>
+      <textarea id="backText" placeholder="The Lord’s Prayer or your message"></textarea>
+      <label>Text size</label>
+      <input id="textSize" type="range" min="14" max="48" value="24" />
+
+      <div class="controls">
+        <button id="flipBtn" class="alt" aria-label="Flip front/back">Flip front/back</button>
+        <button id="proofBtn" aria-label="Download proof image">Download proof PNG</button>
+        <button id="checkoutBtn" aria-label="Checkout">Checkout</button>
+      </div>
+      <div class="status" id="status" aria-live="polite">Ready.</div>
+
+      <div class="note">
+        For GitHub Pages deployments, set <code>SERVER_BASE_URL</code> in <code>config.js</code> to your hosted backend URL (https).<br/>
+        Local dev can use <code>http://localhost:4242</code>.
+      </div>
+    </section>
+
+    <section class="canvasWrap">
+      <div class="chip" id="sideChip">Front</div>
+      <canvas id="c"></canvas>
+      <noscript style="position:absolute;bottom:10px;left:10px;background:#fff;padding:8px 10px;border-radius:10px;border:1px solid #eee;font-size:12px">
+        Please enable JavaScript to view the 3D preview.
+      </noscript>
+    </section>
+  </div>
+
+  <footer>
+    © EverKind Keepsakes • This is a demo preview only. Final layout is reviewed by our team before production.
+  </footer>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
